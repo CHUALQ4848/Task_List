@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Developer {
+  id        String          @id @default(uuid())
+  name      String
+  email     String          @unique
+  tasks     Task[]
+  skills    DeveloperSkill[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model Skill {
+  id         String          @id @default(uuid())
+  name       String          @unique
+  tasks      TaskSkill[]
+  developers DeveloperSkill[]
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+model Task {
+  id           String      @id @default(uuid())
+  title        String
+  status       String      @default("To-do")
+  developerId  String?
+  developer    Developer?  @relation(fields: [developerId], references: [id])
+  parentTaskId String?
+  parentTask   Task?       @relation("TaskSubtasks", fields: [parentTaskId], references: [id], onDelete: Cascade)
+  subtasks     Task[]      @relation("TaskSubtasks")
+  skills       TaskSkill[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model TaskSkill {
+  id      String @id @default(uuid())
+  taskId  String
+  skillId String
+  task    Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, skillId])
+}
+
+model DeveloperSkill {
+  id          String    @id @default(uuid())
+  developerId String
+  skillId     String
+  developer   Developer @relation(fields: [developerId], references: [id], onDelete: Cascade)
+  skill       Skill     @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([developerId, skillId])
+}
