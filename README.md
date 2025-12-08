@@ -63,11 +63,11 @@ The application follows a modern three-tier architecture:
 ### Backend Dependencies
 
 | Library                  | Version   | Purpose               | Justification                                                                              |
-| ------------------------ | --------- | --------------------- | ------------------------------------------------------------------------------------------ | --- |
+| ------------------------ | --------- | --------------------- | ------------------------------------------------------------------------------------------ |
 | **Express.js**           | ^4.18.2   | Web Framework         | Minimal and flexible Node.js framework with robust middleware ecosystem                    |
 | **Prisma**               | ^5.7.0    | Database ORM          | Type-safe database client with migrations, introspection, and excellent TypeScript support |
 | **PostgreSQL**           | 16-alpine | Database              | Reliable ACID-compliant relational database with excellent performance and JSON support    |
-| **Google Generative AI** | ^0.1.3    | AI Integration        | Advanced language model for intelligent task assignment and description generation         |     |
+| **Google Generative AI** | ^0.1.3    | AI Integration        | Advanced language model for intelligent task assignment and description generation         |
 | **dotenv**               | ^16.3.1   | Environment Variables | Secure configuration management for different environments                                 |
 | **Jest**                 | ^29.7.0   | Testing Framework     | Comprehensive testing with mocking, coverage reports, and snapshot testing                 |
 | **TSX**                  | ^4.6.2    | TypeScript Execution  | Direct TypeScript execution for development and scripts                                    |
