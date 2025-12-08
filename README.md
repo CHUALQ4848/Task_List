@@ -174,33 +174,11 @@ docker-compose up -d
 
 ## Running the Application
 
-### Production Deployment
-
-1. **Build and deploy with Docker**
-
-   ```bash
-   # Build production images
-   docker-compose -f docker-compose.prod.yml build
-
-   # Deploy
-   docker-compose -f docker-compose.prod.yml up -d
-   ```
-
-2. **Health Check**
-
-   ```bash
-   # Check backend health
-   curl http://localhost:5001/health
-
-   # Check frontend
-   curl http://localhost:3000
-   ```
-
 ### Development Mode
 
 ```bash
-# Start all services
-docker-compose up -d
+# Build & Start all services
+docker-compose up --build
 
 # View logs
 docker-compose logs -f
@@ -214,7 +192,6 @@ docker-compose down
 ### Base URL
 
 - Development: `http://localhost:5001/api`
-- Production: `https://your-domain.com/api`
 
 ### Authentication
 
