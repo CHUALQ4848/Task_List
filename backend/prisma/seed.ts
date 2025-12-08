@@ -4,16 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Create skills first
-  const skills = [
-    "Frontend",
-    "Backend",
-    "Database",
-    "DevOps",
-    "UI/UX",
-    "Testing",
-    "Mobile",
-    "AI/ML",
-  ];
+  const skills = ["Frontend", "Backend"];
 
   await prisma.skill.createMany({
     data: skills.map((name) => ({ name })),
@@ -27,10 +18,6 @@ async function main() {
   const backendSkill = await prisma.skill.findUnique({
     where: { name: "Backend" },
   });
-  const databaseSkill = await prisma.skill.findUnique({
-    where: { name: "Database" },
-  });
-  const uiuxSkill = await prisma.skill.findUnique({ where: { name: "UI/UX" } });
 
   // Create developers with skills
   const alice = await prisma.developer.create({
@@ -38,7 +25,7 @@ async function main() {
       name: "Alice",
       email: "alice@gmail.com",
       skills: {
-        create: [{ skillId: frontendSkill!.id }, { skillId: uiuxSkill!.id }],
+        create: [{ skillId: frontendSkill!.id }],
       },
     },
   });
@@ -48,7 +35,7 @@ async function main() {
       name: "Bob",
       email: "bob@gmail.com",
       skills: {
-        create: [{ skillId: backendSkill!.id }, { skillId: databaseSkill!.id }],
+        create: [{ skillId: backendSkill!.id }, { skillId: frontendSkill!.id }],
       },
     },
   });
